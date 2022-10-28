@@ -9,6 +9,8 @@ $("h1").text("Press A Key to Start");
 $(document).keypress(function () {
     if (!inProgress) {
         inProgress = true;
+        gamePattern = [];
+        userClickedPattern=[];
         level = 0;
         $("#level-title").text("Level " + level);
         nextSequence();
@@ -65,6 +67,12 @@ function checkAnswer(userIndex) {
         }
     } else {
         console.log("wrong")
+        playSound("wrong");
+        $("body").addClass("game-over");
+        setTimeout(function (){
+            $("body").removeClass("game-over");
+        }, 200)
+        $("h1").text("Game Over, Press Any Key to Restart");
         inProgress = false;
     }
 
